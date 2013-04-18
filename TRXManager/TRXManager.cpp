@@ -429,7 +429,7 @@ bool ::ARFCNManager::setTSC(unsigned TSC)
 bool ::ARFCNManager::setSlot(unsigned TN, unsigned combination)
 {
 	assert(TN<8);
-	assert(combination<8);
+	assert(combination<14);
 	char paramBuf[MAX_UDP_LENGTH];
 	sprintf(paramBuf,"%d %d", TN, combination);
 	int status = sendCommand("SETSLOT",paramBuf);
