@@ -263,6 +263,109 @@ void L3RACHControlParameters::text(ostream& os) const
 }
 
 
+void L3SI3RestOctets::writeV(L3Frame& dest, size_t &wp) const
+{
+	// GMS 04.08 10.5.2.34
+	dest.writeField(wp, 0, 1); // "L" Optional selection parameters: Not present
+	dest.writeField(wp, 0, 1); // "L" Optional Power offset: Not present
+	dest.writeField(wp, 1, 1); // "L" System Information 2ter Indicator: Not present
+	dest.writeField(wp, 0, 1); // "L" Early Classmark Sending Control: Not present
+	dest.writeField(wp, 1, 1); // "L" Scheduling if and where: Not present
+	dest.writeField(wp, 1, 1); // "H" GPRS Indicator: Present
+	dest.writeField(wp, mRA_COLOUR, 3);     // RA COLOUR
+	dest.writeField(wp, mSI13_POSITION, 1); // SI13 POSITION
+	// spare padding
+	dest.writeField(wp, 0x2b, 6);
+	for (int i=0; i<2; i++)
+		dest.writeField(wp,0x2b,8);
+}
+
+
+
+void L3SI3RestOctets::text(ostream& os) const
+{
+
+	os << "RA_COLOUR=" << mRA_COLOUR;
+	os << "SI13_POSITION=" << mSI13_POSITION;
+}
+
+void L3SI13RestOctets::writeV(L3Frame& dest, size_t &wp) const
+{
+	// GMS 04.08 10.5.2.37b
+	dest.writeField(wp, 0x1, 1);               // "H" SI 13 Rest Octets: Present
+	dest.writeField(wp, mBCCH_CHANGE_MARK, 3); // BCCH_CHANGE_MARK
+	dest.writeField(wp, mSI_CHANGE_FIELD, 4);  // SI_CHANGE_FIELD
+	dest.writeField(wp, 0x1, 1);               // "1" GPRS Mobile Allocation: Present
+	dest.writeField(wp, mSI13_CHANGE_MARK, 2); // SI13_CHANGE_MARK
+
+	// GPRS Mobile Allocation GSM 04.60 12.10a
+	dest.writeField(wp, mHSN, 6);              // Hopping sequence number
+	dest.writeField(wp, 0x0, 1);               // "0" RFL number list: Not present
+	dest.writeField(wp, 0x0, 1);               // "0" MA_BITMAP: Present
+	dest.writeField(wp, mMA_BITMAP_LENGTH, 6); // MA_BITMAP_LENGTH
+	dest.writeField(wp, mMA_BITMAP, 4);        // MA_BITMAP
+
+	dest.writeField(wp, 0x0, 1);                    // "0" PBCCH not present in Cell
+	dest.writeField(wp, mRAC, 8);                   // RAC
+	dest.writeField(wp, mSPGC_CCCH_SUP, 1);         // SPGC_CCCH_SUP
+	dest.writeField(wp, mPRIORITY_ACCESS_THR, 3);   // PRIORITY_ACCESS_THR
+	dest.writeField(wp, mNETWORK_CONTROL_ORDER, 2); // NETWORK_CONTROL_ORDER
+
+	// GPRS Cell Options GSM 04.60 12.24 
+	dest.writeField(wp, mNMO, 2);               // NMO Network Mode of Operation
+	dest.writeField(wp, mT3168, 3);             // T3168
+	dest.writeField(wp, mT3192, 3);             // T3192
+	dest.writeField(wp, mDRXTIMER_MAX, 3);      // DRXTIMER_MAX
+	dest.writeField(wp, mACCESS_BURST_TYPE, 1); // ACCESS_BURST_TYPE
+	dest.writeField(wp, mCONTROL_ACK_TYPE, 1);  // Control Ack Type
+	dest.writeField(wp, mBS_CV_MAX, 4);         // BS_CV_MAX
+	dest.writeField(wp, 0x1, 1);                // "1" PAN description: Present
+	dest.writeField(wp, mPAN_DEC, 3);           // PAN_DEC
+	dest.writeField(wp, mPAN_INC, 3);           // PAN_INC
+	dest.writeField(wp, mPAN_MAX, 3);           // PAN_MAX
+	dest.writeField(wp, 0x0, 1);                // "0" Cell Options Extension Information: Not present
+
+	// GPRS Power Control Parameters
+	dest.writeField(wp, mALPHA, 4);         // ALPHA 
+	dest.writeField(wp, mT_AVG_W, 5);       // T_AVG_W
+	dest.writeField(wp, mT_AVG_T, 5);       // T_AVG_T              
+	dest.writeField(wp, mPC_MEAS_CHAN, 1);  // PC_MEAS_CHAN
+	dest.writeField(wp, mN_AVG_I, 4);       // N_AVG_I
+	// spare padding
+	dest.writeField(wp, 0x0b, 5);
+	for (int i=0; i<8; i++)
+		dest.writeField(wp,0x2b,8);
+}
+
+void L3SI13RestOctets::text(ostream& os) const
+{
+	os << " BCCH_CHANGE_MARK=" << mBCCH_CHANGE_MARK;
+	os << " SI_CHANGE_FIELD=" << mSI_CHANGE_FIELD;
+	os << " SI13_CHANGE_MARK=" << mSI13_CHANGE_MARK;
+	os << " HSN=" << mHSN;
+	os << " MA_BITMAP_LENGTH=" << mMA_BITMAP_LENGTH;
+	os << " MA_BITMAP=" << mMA_BITMAP;
+	os << " RAC=" << mRAC;
+	os << " SPGC_CCCH_SUP=" << mSPGC_CCCH_SUP;
+	os << " PRIORITY_ACCESS_THR=" << mPRIORITY_ACCESS_THR; 
+	os << " NETWORK_CONTROL_ORDER=" << mNETWORK_CONTROL_ORDER;
+	os << " NMO=" << mNMO;
+	os << " T3168=" << mT3168;
+	os << " T3192=" << mT3192;
+	os << " DRXTIMER_MAX=" << mDRXTIMER_MAX;
+	os << " ACCESS_BURST_TYPE=" << mACCESS_BURST_TYPE;
+	os << " CONTROL_ACK_TYPE=" << mCONTROL_ACK_TYPE;
+	os << " BS_CV_MAX=" << mBS_CV_MAX;
+	os << " PAN_DEC=" << mPAN_DEC;
+	os << " PAN_INC=" << mPAN_INC;
+	os << " PAN_MAX=" << mPAN_MAX;
+	os << " ALPHA=" << mALPHA;
+	os << " T_AVG_W=" << mT_AVG_W;
+	os << " T_AVG_T=" << mT_AVG_T;
+	os << " PC_MEAS_CHAN=" << mPC_MEAS_CHAN;
+	os << " N_AVG_I=" << mN_AVG_I;
+}
+
 
 void L3PageMode::writeV(L3Frame& dest, size_t &wp) const
 {

@@ -997,7 +997,15 @@ void BCCHL1Encoder::generate()
 		case 1: writeHighSide(gBTS.SI2Frame()); return;
 		case 2: writeHighSide(gBTS.SI3Frame()); return;
 		case 3: writeHighSide(gBTS.SI4Frame()); return;
-		case 4: writeHighSide(gBTS.SI3Frame()); return;
+		case 4: {
+			if (gConfig.getNum("GSM.GPRS")) {
+				writeHighSide(gBTS.SI13Frame());
+			}
+			else {
+				writeHighSide(gBTS.SI3Frame());
+			}
+			return;
+		}
 		case 5: writeHighSide(gBTS.SI2Frame()); return;
 		case 6: writeHighSide(gBTS.SI3Frame()); return;
 		case 7: writeHighSide(gBTS.SI4Frame()); return;

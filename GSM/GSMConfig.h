@@ -93,6 +93,7 @@ class GSMConfig {
 	L2Frame mSI2Frame;
 	L2Frame mSI3Frame;
 	L2Frame mSI4Frame;
+	L2Frame mSI13Frame;
 	//@}
 
 	/**@name Encoded L3 frames to be sent on the SACCH. */
@@ -125,6 +126,7 @@ class GSMConfig {
 	const L2Frame& SI2Frame() const { return mSI2Frame; }
 	const L2Frame& SI3Frame() const { return mSI3Frame; }
 	const L2Frame& SI4Frame() const { return mSI4Frame; }
+	const L2Frame& SI13Frame() const { return mSI13Frame; }
 	//@}
 	/**@name Get references to L3 frames for SACCH SI messages. */
 	//@{

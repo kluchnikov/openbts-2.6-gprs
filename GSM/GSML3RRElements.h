@@ -336,6 +336,104 @@ class L3RACHControlParameters : public L3ProtocolElement {
 
 
 
+/** SI 3 Rest Octets GSM 04.08 10.5.2.34 */
+class L3SI3RestOctets : public L3ProtocolElement {
+
+	private:
+
+	unsigned mRA_COLOUR;        ///< RA COLOUR
+	unsigned mSI13_POSITION;    ///< SI13 POSITION
+
+	public:
+
+	/** Default constructor parameters allows all access. */
+	L3SI3RestOctets()
+		:L3ProtocolElement()
+	{
+		mRA_COLOUR = gConfig.getNum("GPRS.SI3.RA_COLOUR");
+		mSI13_POSITION = gConfig.getNum("GPRS.SI3.SI13_POSITION");
+	}
+
+	size_t lengthV() const { return 4; }
+	void writeV(L3Frame& dest, size_t &wp) const;
+	void parseV(const L3Frame&, size_t&) { assert(0); }
+	void parseV(const L3Frame&, size_t& , size_t) { assert(0); }
+	void text(std::ostream&) const;
+
+};
+
+/** SI 13 Rest Octets GSM 04.08 10.5.2.37b */
+class L3SI13RestOctets : public L3ProtocolElement {
+
+	private:
+
+	unsigned mBCCH_CHANGE_MARK;         ///< BCCH CHANGE MARK
+	unsigned mSI_CHANGE_FIELD;          ///< SI CHANGE FIELD
+	unsigned mSI13_CHANGE_MARK;         ///< SI13 CHANGE MARK
+	unsigned mHSN;                      ///< HSN 
+	unsigned mMA_BITMAP_LENGTH;         ///< MA BITMAP LENGTH
+	unsigned mMA_BITMAP;                ///< MA BITMAP
+	unsigned mRAC;                      ///< RAC
+	unsigned mSPGC_CCCH_SUP;            ///< SPGC CCCH SUP
+	unsigned mPRIORITY_ACCESS_THR;      ///< PRIORITY ACCESS THR
+	unsigned mNETWORK_CONTROL_ORDER;    ///< NETWORK CONTROL ORDER
+	unsigned mNMO;                      ///< NMO
+	unsigned mT3168;                    ///< T3168
+	unsigned mT3192;                    ///< T3192
+	unsigned mDRXTIMER_MAX;             ///< DRXTIMER MAX
+	unsigned mACCESS_BURST_TYPE;        ///< ACCESS BURST TYPE
+	unsigned mCONTROL_ACK_TYPE;         ///< CONTROL ACK TYPE
+	unsigned mBS_CV_MAX;                ///< BS CV MAX
+	unsigned mPAN_DEC;                  ///< PAN DEC
+	unsigned mPAN_INC;                  ///< PAN INC
+	unsigned mPAN_MAX;                  ///< PAN MAX
+	unsigned mALPHA;                    ///< ALPHA
+	unsigned mT_AVG_W;                  ///< T AVG W
+	unsigned mT_AVG_T;                  ///< T AVG T
+	unsigned mPC_MEAS_CHAN;             ///< PC MEAS CHAN
+	unsigned mN_AVG_I;                  ///< N AVG I
+
+	public:
+
+	/** Default constructor parameters allows all access. */
+	L3SI13RestOctets()
+		:L3ProtocolElement()
+	{
+		mBCCH_CHANGE_MARK = gConfig.getNum("GPRS.SI13.BCCH_CHANGE_MARK");
+		mSI_CHANGE_FIELD = gConfig.getNum("GPRS.SI13.SI_CHANGE_FIELD");
+		mSI13_CHANGE_MARK = gConfig.getNum("GPRS.SI13.SI13_CHANGE_MARK");
+		mHSN = gConfig.getNum("GPRS.SI13.HSN");
+		mMA_BITMAP_LENGTH = gConfig.getNum("GPRS.SI13.MA_BITMAP_LENGTH");
+		mMA_BITMAP = gConfig.getNum("GPRS.SI13.MA_BITMAP");
+		mRAC = gConfig.getNum("GPRS.SI13.RAC");
+		mSPGC_CCCH_SUP = gConfig.getNum("GPRS.SI13.SPGC_CCCH_SUP");
+		mPRIORITY_ACCESS_THR = gConfig.getNum("GPRS.SI13.PRIORITY_ACCESS_THR"); 
+		mNETWORK_CONTROL_ORDER = gConfig.getNum("GPRS.SI13.NETWORK_CONTROL_ORDER");
+		mNMO = gConfig.getNum("GPRS.SI13.NMO");
+		mT3168 = gConfig.getNum("GPRS.SI13.T3168");
+		mT3192 = gConfig.getNum("GPRS.SI13.T3192");
+		mDRXTIMER_MAX = gConfig.getNum("GPRS.SI13.DRXTIMER_MAX");
+		mACCESS_BURST_TYPE = gConfig.getNum("GPRS.SI13.ACCESS_BURST_TYPE");
+		mCONTROL_ACK_TYPE = gConfig.getNum("GPRS.SI13.CONTROL_ACK_TYPE");
+		mBS_CV_MAX = gConfig.getNum("GPRS.SI13.BS_CV_MAX");
+		mPAN_DEC = gConfig.getNum("GPRS.SI13.PAN_DEC");
+		mPAN_INC = gConfig.getNum("GPRS.SI13.PAN_INC");
+		mPAN_MAX = gConfig.getNum("GPRS.SI13.PAN_MAX");
+		mALPHA = gConfig.getNum("GPRS.SI13.ALPHA");
+		mT_AVG_W = gConfig.getNum("GPRS.SI13.T_AVG_W");
+		mT_AVG_T = gConfig.getNum("GPRS.SI13.T_AVG_T");
+		mPC_MEAS_CHAN = gConfig.getNum("GPRS.SI13.PC_MEAS_CHAN");
+		mN_AVG_I = gConfig.getNum("GPRS.SI13.N_AVG_I");
+	}
+
+	size_t lengthV() const { return 20; }
+	void writeV(L3Frame& dest, size_t &wp) const;
+	void parseV(const L3Frame&, size_t&) { assert(0); }
+	void parseV(const L3Frame&, size_t& , size_t) { assert(0); }
+	void text(std::ostream&) const;
+
+};
+
 
 
 /** PageMode, GSM 04.08 10.5.2.26 */

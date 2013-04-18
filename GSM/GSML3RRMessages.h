@@ -310,6 +310,7 @@ class L3SystemInformationType3 : public L3RRMessage {
 	L3CellOptionsBCCH mCellOptions;
 	L3CellSelectionParameters mCellSelectionParameters;
 	L3RACHControlParameters mRACHControlParameters;
+	L3SI3RestOctets mSI3RestOctets;
 
 	public:
 
@@ -331,9 +332,12 @@ class L3SystemInformationType3 : public L3RRMessage {
 	void RACHControlParameters(const L3RACHControlParameters& wRACHControlParameters)
 		{ mRACHControlParameters = wRACHControlParameters; }
 
+	void SI3RestOctets(const L3SI3RestOctets& wSI3RestOctets)
+		{ mSI3RestOctets = wSI3RestOctets; }
+
 	int MTI() const { return (int)SystemInformationType3; }
 
-	size_t bodyLength() const { return 16; }
+	size_t bodyLength() const { if (gConfig.getNum("GSM.GPRS")) return 20; return 16; }
 	void writeBody(L3Frame &dest, size_t &wp) const;
 	void text(std::ostream&) const;
 };
@@ -449,6 +453,30 @@ class L3SystemInformationType6 : public L3RRMessage {
 	void text(std::ostream&) const;
 };
 
+
+/**
+	System Information Type 13, GSM 04.08 9.1.43a
+	- SI 13 Rest Octets 10.5.2.37b M V 20
+*/
+class L3SystemInformationType13 : public L3RRMessage {
+
+	private:
+
+	L3SI13RestOctets mSI13RestOctets;
+
+	public:
+
+	L3SystemInformationType13():L3RRMessage() {}
+ 
+	void SI13RestOctets(const L3SI13RestOctets& wSI13RestOctets)
+		{ mSI13RestOctets = wSI13RestOctets; }
+
+	int MTI() const { return (int)SystemInformationType13; }
+
+	size_t bodyLength() const { return 20; }
+	void writeBody(L3Frame &dest, size_t &wp) const;
+	void text(std::ostream&) const;
+};
 
 
 

@@ -105,6 +105,14 @@ void GSMConfig::regenerateBeacon()
 	mSI4Frame = L2Frame(SI4Header,l3);
 	LOG(DEBUG) << "mSI4Frame " << mSI4Frame;
 
+	// SI13
+	L3SystemInformationType13 SI13;
+	LOG(INFO) << SI13;
+	SI13.write(l3);
+	L2Header SI13Header(L2Length(l3.length()));
+	mSI13Frame = L2Frame(SI13Header,l3);
+	LOG(DEBUG) << "mSI13Frame " << mSI13Frame;
+
 	// SI5
 	L3SystemInformationType5 SI5;
 	LOG(INFO) << SI5;
