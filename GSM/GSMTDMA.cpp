@@ -269,7 +269,91 @@ MAKE_TDMA_MAPPING(SACCH_TF_T7,TCHF_0,true,true,0x80,true,104);
 const unsigned FACCH_TCHFFrames[] = {0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24};
 MAKE_TDMA_MAPPING(FACCH_TCHF,TCHF_0,true,true,0xff,true,26);
 
+//GPRS channels
+const unsigned PDTCH_FFrames[] = {0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,46,47,48,49,50};
+MAKE_TDMA_MAPPING(PDTCH_F,TCHF_0,true,true,0xff,false,52);
 
+const unsigned PDTCH_H_0Frames[] = {0,2,4,6,8,10,13,15,17,19,21,23,26,28,30,32,34,36,39,41,43,45,47,49};
+MAKE_TDMA_MAPPING(PDTCH_H_0,TCHF_0,true,true,0xff,false,52);
+
+const unsigned PDTCH_H_1Frames[] = {1,3,5,7,9,11,14,16,18,20,22,24,27,29,31,33,35,37,40,42,44,46,48,50};
+MAKE_TDMA_MAPPING(PDTCH_H_1,TCHF_0,true,true,0xff,false,52);
+
+const unsigned PACCH_FFrames[] = {0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,46,47,48,49,50};
+MAKE_TDMA_MAPPING(PACCH_F,TCHF_0,true,true,0xff,false,52);
+
+const unsigned PACCH_H_0Frames[] = {0,2,4,6,8,10,13,15,17,19,21,23,26,28,30,32,34,36,39,41,43,45,47,49};
+MAKE_TDMA_MAPPING(PACCH_H_0,TCHF_0,true,true,0xff,false,52);
+
+const unsigned PACCH_H_1Frames[] = {1,3,5,7,9,11,14,16,18,20,22,24,27,29,31,33,35,37,40,42,44,46,48,50};
+MAKE_TDMA_MAPPING(PACCH_H_1,TCHF_0,true,true,0xff,false,52);
+
+const unsigned PBCCHFrames[] = {0,1,2,3,13,14,15,16,26,27,28,29,39,40,41,42};
+MAKE_TDMA_MAPPING(PBCCH,TCHF_0,true,false,0xff,false,52);
+
+const unsigned PRACHFrames[] = {0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,46,47,48,49,50};
+MAKE_TDMA_MAPPING(PRACH,TCHF_0,false,true,0xff,false,52);
+
+const unsigned PPCHFrames[] = {4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,46,47,48,49,50};
+MAKE_TDMA_MAPPING(PPCH,TCHF_0,true,false,0xff,false,52);
+
+const unsigned PNCHFrames[] = {4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,46,47,48,49,50};
+MAKE_TDMA_MAPPING(PNCH,TCHF_0,true,false,0xff,false,52);
+
+const unsigned PAGCHFrames[] = {0,1,2,3,4,5,6,7,8,9,10,11,13,14,15,16,17,18,19,20,21,22,23,24,26,27,28,29,30,31,32,33,34,35,36,37,39,40,41,42,43,44,45,46,47,48,49,50};
+MAKE_TDMA_MAPPING(PAGCH,TCHF_0,true,false,0xff,false,52);
+/*
+const unsigned PTCCH_DFrames[] = {12,38,64,90,116,142,168,194,220,246,272,298,324,350,376,402};
+MAKE_TDMA_MAPPING(PTCCH_D,TCHF_0,true,false,0xff,false,416);
+
+const unsigned PTCCH_0UFrames[] = {12};
+MAKE_TDMA_MAPPING(PTCCH_0U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_1UFrames[] = {38};
+MAKE_TDMA_MAPPING(PTCCH_1U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_2UFrames[] = {64};
+MAKE_TDMA_MAPPING(PTCCH_2U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_3UFrames[] = {90};
+MAKE_TDMA_MAPPING(PTCCH_3U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_4UFrames[] = {116};
+MAKE_TDMA_MAPPING(PTCCH_4U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_5UFrames[] = {142};
+MAKE_TDMA_MAPPING(PTCCH_5U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_6UFrames[] = {168};
+MAKE_TDMA_MAPPING(PTCCH_6U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_7UFrames[] = {194};
+MAKE_TDMA_MAPPING(PTCCH_7U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_8UFrames[] = {220};
+MAKE_TDMA_MAPPING(PTCCH_8U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_9UFrames[] = {246};
+MAKE_TDMA_MAPPING(PTCCH_9U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_10UFrames[] = {272};
+MAKE_TDMA_MAPPING(PTCCH_10U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_11UFrames[] = {298};
+MAKE_TDMA_MAPPING(PTCCH_11U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_12UFrames[] = {324};
+MAKE_TDMA_MAPPING(PTCCH_12U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_13UFrames[] = {350};
+MAKE_TDMA_MAPPING(PTCCH_13U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_14UFrames[] = {376};
+MAKE_TDMA_MAPPING(PTCCH_14U,TCHF_0,false,true,0xff,false,416);
+
+const unsigned PTCCH_15UFrames[] = {402};
+MAKE_TDMA_MAPPING(PTCCH_15U,TCHF_0,false,true,0xff,false,416);
+*/
 
 
 

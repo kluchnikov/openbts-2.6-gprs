@@ -219,6 +219,62 @@ extern const TDMAMapping gSACCH_TF_T7Mapping;
 //@{
 extern const TDMAMapping gFACCH_TCHFMapping;
 //@}
+/**@name GPRS channels */
+//@{
+///@name PDTCH
+//@{
+extern const TDMAMapping gPDTCH_FMapping;	///< GSM 05.02 Clause 7 Table 6 Line 1
+extern const TDMAMapping gPDTCH_H_0Mapping;	///< GSM 05.02 Clause 7 Table 6 Line 2
+extern const TDMAMapping gPDTCH_H_1Mapping;	///< GSM 05.02 Clause 7 Table 6 Line 2
+//@}
+///@name PACCH
+//@{
+extern const TDMAMapping gPACCH_FMapping;	///< GSM 05.02 Clause 7 Table 6 Line 1
+extern const TDMAMapping gPACCH_H_0Mapping;	///< GSM 05.02 Clause 7 Table 6 Line 2
+extern const TDMAMapping gPACCH_H_1Mapping;	///< GSM 05.02 Clause 7 Table 6 Line 2
+//@}
+///@name PBCCH
+//@{
+extern const TDMAMapping gPBCCHMapping;	///< GSM 05.02 Clause 7 Table 6 Line 3
+//@}
+///@name PRACH
+//@{
+extern const TDMAMapping gPRACHMapping;	///< GSM 05.02 Clause 7 Table 6 Line 4
+//@}
+///@name PPCH
+//@{
+extern const TDMAMapping gPPCHMapping;	///< GSM 05.02 Clause 7 Table 6 Line 5
+//@}
+///@name PNCH
+//@{
+extern const TDMAMapping gPNCHMapping;	///< GSM 05.02 Clause 7 Table 6 Line 5
+//@}
+///@name PAGCH
+//@{
+extern const TDMAMapping gPAGCHMapping;	///< GSM 05.02 Clause 7 Table 6 Line 6
+//@}
+///@name PTCCH
+//@{
+/*
+extern const TDMAMapping gPTCCH_DMapping;	///< GSM 05.02 Clause 7 Table 6 Line 7
+extern const TDMAMapping gPTCCH_0UMapping;	///< GSM 05.02 Clause 7 Table 6 Line 8
+extern const TDMAMapping gPTCCH_1UMapping;
+extern const TDMAMapping gPTCCH_2UMapping;
+extern const TDMAMapping gPTCCH_3UMapping;
+extern const TDMAMapping gPTCCH_4UMapping;
+extern const TDMAMapping gPTCCH_5UMapping;
+extern const TDMAMapping gPTCCH_6UMapping;
+extern const TDMAMapping gPTCCH_7UMapping;
+extern const TDMAMapping gPTCCH_8UMapping;
+extern const TDMAMapping gPTCCH_9UMapping;
+extern const TDMAMapping gPTCCH_10UMapping;
+extern const TDMAMapping gPTCCH_11UMapping;
+extern const TDMAMapping gPTCCH_12UMapping;
+extern const TDMAMapping gPTCCH_13UMapping;
+extern const TDMAMapping gPTCCH_14UMapping;
+extern const TDMAMapping gPTCCH_15UMapping;
+//@}
+*/
 /**@name Test fixtures. */
 extern const TDMAMapping gLoopbackTestFullMapping;
 extern const TDMAMapping gLoopbackTestHalfUMapping;
@@ -293,6 +349,10 @@ extern const MappingPair gSACCH_FT_T4Pair;
 extern const MappingPair gSACCH_FT_T5Pair;
 extern const MappingPair gSACCH_FT_T6Pair;
 extern const MappingPair gSACCH_FT_T7Pair;
+//@}
+/**@name GPRS channels. */
+//@{
+extern const MappingPair gPDTCH_FPair;
 //@}
 //@}
 
