@@ -40,6 +40,17 @@ ostream& GSM::operator<<(ostream& os, L3PD val)
 	return os;
 }
 
+ostream& GSM::operator<<(ostream& os, RLCMACPayloadType val)
+{
+	switch (val) {
+		case RLCMACDataBlockType: os << "RLC data block"; break;
+		case RLCMACControlBlockType1: os << "RLC/MAC control block type 1"; break;
+		case RLCMACControlBlockType2: os << "RLC/MAC control block type 2"; break;
+		case RLCMACReserved: os << "Reserved"; break;           
+		default: os << hex << "0x" << (int)val << dec;
+	}
+	return os;
+}
 
 const BitVector GSM::gTrainingSequence[] = {
     BitVector("00100101110000100010010111"),

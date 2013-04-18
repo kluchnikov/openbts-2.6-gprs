@@ -661,6 +661,58 @@ class VocoderFrame : public BitVector {
 
 typedef InterthreadQueue<VocoderFrame> VocoderFrameFIFO;
 
+
+/**
+	Representation of a GPRS RLC/MAC block in a bit vector.
+	Bit ordering is MSB-first in each octet.
+	NOTE: This is for the  GPRS RLC/MAC block bits, not the block content.  See RLCMACBlock.
+*/
+class RLCMACFrame : public BitVector {
+
+	int mFN;
+
+	public:
+
+	/** Empty frame with a primitive. */
+	RLCMACFrame(size_t len=0)
+		:BitVector(len)
+	{ }
+
+	/** Put raw bits into the frame. */
+	RLCMACFrame(const BitVector& source)
+		:BitVector(source)
+	{ }
+
+	RLCMACFrame(const L3Frame& f1, const L3Frame& f2)
+		:BitVector(f1,f2)
+	{}
+
+	/** Get a frame from a hex string. */
+	RLCMACFrame(const char*);
+
+	/** Get a frame from raw binary. */
+	RLCMACFrame(const char*, size_t len);
+
+	/** Payload Type, GSM 44.060 10.4.7. */
+	RLCMACPayloadType payloadType() const { return (RLCMACPayloadType)peekField(0,2); }
+
+	/** Return frame length in BYTES. */
+	size_t length() const { return size()/8; }
+	
+	int fn() const { return mFN; }
+	
+	void fn(int fn) { mFN = fn; }
+
+};
+
+
+
+std::ostream& operator<<(std::ostream& os, const RLCMACFrame&);
+
+typedef InterthreadQueue<RLCMACFrame> RLCMACFrameFIFO;
+
+
+
 };	// namespace GSM
 
 

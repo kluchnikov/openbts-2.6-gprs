@@ -473,6 +473,27 @@ L3Frame::L3Frame(const char* binary, size_t len)
 	}
 }
 
+RLCMACFrame::RLCMACFrame(const char* hexString)
+{
+	size_t len = strlen(hexString);
+	resize(len*4);
+	size_t wp=0;
+	for (size_t i=0; i<len; i++) {
+		char c = hexString[i];
+		int v = c - '0';
+		if (v>9) v = c - 'a' + 10;
+		writeField(wp,v,4);
+	}
+}
 
+
+RLCMACFrame::RLCMACFrame(const char* binary, size_t len)
+{
+	resize(len*8);
+	size_t wp=0;
+	for (size_t i=0; i<len; i++) {
+		writeField(wp,binary[i],8);
+	}
+}
 
 // vim: ts=4 sw=4
