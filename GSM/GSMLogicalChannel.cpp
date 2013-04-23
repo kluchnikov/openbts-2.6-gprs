@@ -256,6 +256,24 @@ void *GSM::SACCHLogicalChannelServiceLoopAdapter(SACCHLogicalChannel* chan)
 }
 
 
+PDTCHLogicalChannel::PDTCHLogicalChannel(
+		unsigned wTN,
+		const MappingPair& wMapping)
+{
+	mPDTCHL1 = new PDTCHL1FEC(wTN,wMapping);
+	mL1 = mPDTCHL1;
+	// SAP1
+	mL2[1] = new SACCHL2(1,1);
+	connect();
+	assert(mSACCH==NULL);
+}
+
+
+void PDTCHLogicalChannel::open()
+{
+	LogicalChannel::open();
+}
+
 // These have to go into the .cpp file to prevent an illegal forward reference.
 void LogicalChannel::setPhy(float wRSSI, float wTimingError)
 	{ assert(mSACCH); mSACCH->setPhy(wRSSI,wTimingError); }

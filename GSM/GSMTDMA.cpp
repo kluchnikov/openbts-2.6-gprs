@@ -396,7 +396,7 @@ const MappingPair GSM::gSACCH_FT_T5Pair(gSACCH_TF_T5Mapping, gSACCH_TF_T5Mapping
 const MappingPair GSM::gSACCH_FT_T6Pair(gSACCH_TF_T6Mapping, gSACCH_TF_T6Mapping);
 const MappingPair GSM::gSACCH_FT_T7Pair(gSACCH_TF_T7Mapping, gSACCH_TF_T7Mapping);
 
-
+const MappingPair GSM::gPDTCH_FPair(gPDTCH_FMapping);
 
 const CompleteMapping GSM::gSDCCH_4_0(gSDCCH_4_0Pair,gSACCH_C4_0Pair);
 const CompleteMapping GSM::gSDCCH_4_1(gSDCCH_4_1Pair,gSACCH_C4_1Pair);

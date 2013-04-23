@@ -193,7 +193,14 @@ TCHFACCHLogicalChannel *GSMConfig::getTCH()
 	return chan;
 }
 
-
+PDTCHLogicalChannel *GSMConfig::getPDTCH()
+{
+	mLock.lock();
+	PDTCHLogicalChannel *chan = getChan<PDTCHLogicalChannel>(mPDTCHPool);
+	if (chan) chan->open();
+	mLock.unlock();
+	return chan;
+}
 
 template <class ChanType> size_t chanAvailable(const vector<ChanType*>& chanList)
 {
@@ -222,6 +229,13 @@ size_t GSMConfig::TCHAvailable() const
 	return retVal;
 }
 
+size_t GSMConfig::PDTCHAvailable() const
+{
+	mLock.lock();
+	size_t retVal = chanAvailable<PDTCHLogicalChannel>(mPDTCHPool);
+	mLock.unlock();
+	return retVal;
+}
 
 size_t GSMConfig::totalLoad(const CCCHList& chanList) const
 {
@@ -256,6 +270,10 @@ unsigned GSMConfig::TCHActive() const
 	return countActive(mTCHPool);
 }
 
+unsigned GSMConfig::PDTCHActive() const
+{
+	return countActive(mPDTCHPool);
+}
 
 unsigned GSMConfig::T3122() const
 {

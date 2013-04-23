@@ -37,6 +37,8 @@ Log.Level.CallControl.cpp INFO
 $optional Log.Level.CallControl.cpp
 Log.Level.RadioResource.cpp INFO
 $optional Log.Level.RadioResource.cpp
+Log.Level.GPRSL1Interface.cpp NOTICE
+$optional Log.Level.GPRSL1Interface.cpp
 
 # The log file path.  If not set, logging goes to stdout.
 Log.FileName test.out
@@ -84,8 +86,8 @@ $static TRX.Port
 # Path to transceiver binary
 # If this is not defined, you will need to start the transceiver by hand.
 # YOU MUST HAVE A MATCHING libusrp AS WELL!!
-TRX.Path ../Transceiver/transceiver
-#TRX.Path ../Transceiver52M/transceiver
+#TRX.Path ../Transceiver/transceiver
+TRX.Path ../Transceiver52M/transceiver
 $static TRX.Path
 
 # TRX logging.
@@ -345,10 +347,10 @@ GSM.PowerManager.Period 6000
 
 # Channel configuration
 # Number of C-VII slots (8xSDCCH)
-GSM.NumC7s 1
+GSM.NumC7s 0
 $static GSM.NumC7s
 # Number of C-I slots (1xTCH/F)
-GSM.NumC1s 6
+GSM.NumC1s 3
 $static GSM.NumC1s
 # Half-duplex option for low-capacity on cheap hardware.
 #GSM.HalfDuplex
@@ -559,3 +561,30 @@ GPRS.SI13.T_AVG_T 0
 GPRS.SI13.PC_MEAS_CHAN 0
 GPRS.SI13.N_AVG_I 4
 
+# Timeslots for GPRS channels. You should check GSM Channel configuration, timeslot for GPRS must be free.
+GPRS.TS 4 5 6 7
+GPRS.Local.Port 5934
+GPRS.PCU.IP 127.0.0.1
+GPRS.PCU.Port 5944
+GPRS.SGSN.IP 127.0.0.1
+GPRS.MCC 901
+GPRS.MNC 70
+GPRS.RAC 0
+GPRS.INITIAL_CS 1
+GPRS.T3142 20
+GPRS.T3169 5
+GPRS.T3191 5
+GPRS.T3193_10MS 100
+GPRS.T3195 5
+GPRS.T3101 10
+GPRS.T3103 4
+GPRS.T3105 8
+GPRS.NSEI 8
+GPRS.CELL_ID 0
+GPRS.REPEAT_TIME 5
+GPRS.REPEAT_COUNT 10
+GPRS.BVCI 7
+GPRS.CV_COUNTDOWN 15
+GPRS.NSVCI 4
+GPRS.NSVC_LPORT 5948
+GPRS.NSVC_RPORT 23000

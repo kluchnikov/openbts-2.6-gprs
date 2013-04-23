@@ -89,6 +89,7 @@ AC_CONFIG_FILES([\
     Control/Makefile \
     GSM/Makefile \
     SIP/Makefile \
+    GPRS/Makefile \
     SMS/Makefile \
     Transceiver52M/Makefile \
     Transceiver/Makefile \

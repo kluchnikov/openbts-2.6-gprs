@@ -353,6 +353,32 @@ class SACCHLogicalChannel : public LogicalChannel {
 void *SACCHLogicalChannelServiceLoopAdapter(SACCHLogicalChannel*);
 
 
+/**
+ Packet data traffic channel
+ The packet data traffic channel, used for transfer of traffic 
+ or higher layer signalling RLC/MAC blocks during a TBF.
+*/
+class PDTCHLogicalChannel : public LogicalChannel {
+
+	protected:
+
+	PDTCHL1FEC *mPDTCHL1;
+
+	public:
+
+	PDTCHLogicalChannel(
+		unsigned wTN,
+		const MappingPair& wMapping);
+
+	ChannelType type() const { return PDTCHType; }
+
+	RLCMACFrame* recvPDCH() { return mPDTCHL1->recvPDCH(); }
+
+	void sendRLCMAC(RLCMACFrame *frame) { return mPDTCHL1->sendRLCMAC(frame); }
+
+	void open();
+
+};
 
 
 
@@ -386,6 +412,9 @@ class CCCHLogicalChannel : public NDCCHLogicalChannel {
 
 	void send(const L3RRMessage& msg)
 		{ mQ.write(new L3Frame((const L3Message&)msg,UNIT_DATA)); }
+
+	void send(L3Frame *frame)
+		{ mQ.write(frame); }
 
 	void send(const L3Message&) { assert(0); }
 

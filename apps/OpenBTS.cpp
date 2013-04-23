@@ -31,6 +31,7 @@
 #include <GSMSAPMux.h>
 #include <GSML3RRMessages.h>
 #include <GSMLogicalChannel.h>
+#include <GPRSL1Interface.h>
 
 #include <SIPInterface.h>
 #include <Globals.h>
@@ -237,6 +238,26 @@ int main(int argc, char *argv[])
 		gBTS.createCombination0(gTRX,sCount/8,sCount);
         	if (halfDuplex) sCount++;
 		sCount++;
+	}
+
+
+	//GPRS
+	if (gConfig.getNum("GSM.GPRS")) {
+		PDTCHLogicalChannel* PDTCH[8];
+		vector<unsigned> gprsTS = gConfig.getVector("GPRS.TS");
+
+		for (int i=0; i<gprsTS.size(); i++) {
+			radio->setSlot(gprsTS[i],13);
+		}
+
+		for (int i=0; i<gprsTS.size(); i++) {
+			PDTCH[gprsTS[i]] = new PDTCHLogicalChannel(gprsTS[i],gPDTCH_FPair);
+			PDTCH[gprsTS[i]]->downstream(radio);
+			PDTCH[gprsTS[i]]->open();
+			gBTS.addPDTCH(PDTCH[gprsTS[i]]);
+		}
+		Thread* threadGb = new Thread;
+		threadGb->start((void*(*)(void*))GPRS::GPRSReader,PDTCH);
 	}
 
 	/*

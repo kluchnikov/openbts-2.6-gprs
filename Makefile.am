@@ -30,6 +30,7 @@ SUBDIRS = \
 	Globals \
 	SIP \
 	GSM \
+	GPRS \
 	SMS \
 	Transceiver \
 	Transceiver52M \

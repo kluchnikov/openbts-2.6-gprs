@@ -203,6 +203,10 @@ enum ChannelType {
 	TCHHType,		///< half-rate traffic
 	AnyTCHType,		///< any TCH type
 	//@}
+	///@name GPRS channels
+	//@{
+	PDTCHType,		///< Packet data traffic channel
+	//@}
 	///@name Special internal channel types.
 	//@{
 	LoopbackFullType,		///< loopback testing
@@ -241,6 +245,7 @@ enum TypeAndOffset {
 	SDCCH_4_0=4, SDCCH_4_1=5, SDCCH_4_2=6, SDCCH_4_3=7,
 	SDCCH_8_0=8, SDCCH_8_1=9, SDCCH_8_2=10, SDCCH_8_3=11,
 	SDCCH_8_4=12, SDCCH_8_5=13, SDCCH_8_6=14, SDCCH_8_7=15,
+	PDCH=16,
 	/// An extra one for our internal use.
 	TDMA_BEACON=255
 };

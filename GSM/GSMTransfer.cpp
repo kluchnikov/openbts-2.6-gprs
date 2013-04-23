@@ -496,4 +496,14 @@ RLCMACFrame::RLCMACFrame(const char* binary, size_t len)
 	}
 }
 
+ostream& GSM::operator<<(ostream& os, const RLCMACFrame& frame)
+{
+	os << " Payload Type = " << frame.payloadType();
+	os << " raw=(";
+	frame.hex(os);
+	os << ")";
+	return os;
+}
+
+
 // vim: ts=4 sw=4
