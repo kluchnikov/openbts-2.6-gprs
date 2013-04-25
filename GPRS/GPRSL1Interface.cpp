@@ -287,7 +287,7 @@ void GPRS::GPRSReader(LogicalChannel **PDCH)
 
 	char buf[MAX_UDP_LENGTH];
 
-	size_t l2Len = 0;
+	int l2Len = 0;
 
 	// Send to PCU PhConnectInd primitive.
 	
@@ -336,8 +336,8 @@ void GPRS::GPRSReader(LogicalChannel **PDCH)
 				}
 				L3Frame *l3 = new L3Frame(msg->tail(8), UNIT_DATA);
 				LOG(NOTICE) << "RX:[BTS<-PCU] AGCH:" << *l3;
-				//l2Len = msg->peekField(0, 6);
-				//l3->L2Length(l2Len);
+				l2Len = msg->peekField(0, 6);
+				l3->L2Length(l2Len);
 				AGCH->send(l3);
 				txPhDataIndCnf(*msg, gBTS.time());
 			}
@@ -346,9 +346,9 @@ void GPRS::GPRSReader(LogicalChannel **PDCH)
 				L3Frame *msg1 = new L3Frame(msg->tail(8*4), UNIT_DATA);
 				L3Frame *msg2 = new L3Frame(msg->tail(8*4), UNIT_DATA);
 				LOG(NOTICE) << "RX:[BTS<-PCU] PCH:" << *msg1;
-				//l2Len = msg->peekField(8*3, 6);
-				//msg1->L2Length(l2Len);
-				//msg2->L2Length(l2Len);
+				l2Len = msg->peekField(8*3, 6);
+				msg1->L2Length(l2Len);
+				msg2->L2Length(l2Len);
 				// HACK -- We send every page twice.
 				gBTS.getPCH(0)->send(msg1);
 				gBTS.getPCH(0)->send(msg2);

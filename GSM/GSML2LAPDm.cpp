@@ -71,10 +71,16 @@ void CCCHL2::writeHighSide(const GSM::L3Frame& l3)
 	OBJLOG(DEEPDEBUG) <<"CCCHL2::writeHighSide " << l3;
 	assert(mDownstream);
 	assert(l3.primitive()==UNIT_DATA);
-	L2Header header(L2Length(l3.length()));
+	unsigned len = 0;
+	if (l3.L2Length()) {
+		len = l3.L2Length();
+	}
+	else {
+		len = l3.length();
+	}
+	L2Header header(L2Length((size_t)len));
 	mDownstream->writeHighSide(L2Frame(header,l3));
 }
-	
 
 
 

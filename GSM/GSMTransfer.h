@@ -580,26 +580,27 @@ class L3Frame : public BitVector {
 	private:
 
 	Primitive mPrimitive;
+	size_t mL2Length;		///< length, or L2 pseudo-length, as appropriate
 
 	public:
 
 	/** Empty frame with a primitive. */
 	L3Frame(Primitive wPrimitive=DATA, size_t len=0)
-		:BitVector(len),mPrimitive(wPrimitive)
+		:BitVector(len),mPrimitive(wPrimitive),mL2Length(0)
 	{ }
 
 	/** Put raw bits into the frame. */
 	L3Frame(const BitVector& source, Primitive wPrimitive=DATA)
-		:BitVector(source),mPrimitive(wPrimitive)
+		:BitVector(source),mPrimitive(wPrimitive),mL2Length(0)
 	{ }
 
 	L3Frame(const L3Frame& f1, const L3Frame& f2)
-		:BitVector(f1,f2),mPrimitive(DATA)
+		:BitVector(f1,f2),mPrimitive(DATA),mL2Length(0)
 	{}
 
 	/** Build from an L2Frame. */
 	L3Frame(const L2Frame& source)
-		:BitVector(source.L3Part()),mPrimitive(DATA)
+		:BitVector(source.L3Part()),mPrimitive(DATA),mL2Length(0)
 	{ }
 
 	/** Serialize a message into the frame. */
@@ -628,6 +629,11 @@ class L3Frame : public BitVector {
 
 	/** Return frame length in BYTES. */
 	size_t length() const { return size()/8; }
+
+	/** Length, or L2 pseudolength, as appropriate */
+	size_t L2Length() const { return mL2Length; }
+
+	void L2Length(size_t wL2Length) { mL2Length=wL2Length; }
 
 };
 

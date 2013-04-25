@@ -441,7 +441,7 @@ ostream& GSM::operator<<(ostream& os, Primitive prim)
 
 
 L3Frame::L3Frame(const L3Message& msg, Primitive wPrimitive)
-	:BitVector(msg.bitsNeeded()),mPrimitive(wPrimitive)
+	:BitVector(msg.bitsNeeded()),mPrimitive(wPrimitive),mL2Length(0)
 {
 	msg.write(*this);
 }
@@ -449,7 +449,7 @@ L3Frame::L3Frame(const L3Message& msg, Primitive wPrimitive)
 
 
 L3Frame::L3Frame(const char* hexString)
-	:mPrimitive(DATA)
+	:mPrimitive(DATA),mL2Length(0)
 {
 	size_t len = strlen(hexString);
 	resize(len*4);
@@ -464,7 +464,7 @@ L3Frame::L3Frame(const char* hexString)
 
 
 L3Frame::L3Frame(const char* binary, size_t len)
-	:mPrimitive(DATA)
+	:mPrimitive(DATA),mL2Length(0)
 {
 	resize(len*8);
 	size_t wp=0;
