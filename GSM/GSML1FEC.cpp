@@ -647,6 +647,9 @@ void XCCHL1Decoder::handleGoodFrame()
 	OBJLOG(DEEPDEBUG) <<"XCCHL1Decoder d[]=" << mD;
 
 	if (mUpstream) {
+	
+		gWriteGSMTAP(gConfig.getNum("GSM.ARFCN"),TN(),mReadTime.FN(),
+		   mMapping.typeAndOffset(),mMapping.repeatLength()>51,true,mD);
 		// Build an L2 frame and pass it up.
 		const BitVector L2Part(mD.tail(headerOffset()));
 		OBJLOG(DEEPDEBUG) <<"XCCHL1Decoder L2=" << L2Part;
@@ -846,11 +849,13 @@ void XCCHL1Encoder::sendFrame(const L2Frame& frame)
 	}
 
 	// This comes from GSM 05.03 4.1
-
 	// Copy the L2 frame into u[] for processing.
 	// GSM 05.03 4.1.1.
 	//assert(mD.size()==headerOffset()+frame.size());
 	frame.copyToSegment(mU,headerOffset());
+	
+	gWriteGSMTAP(gConfig.getNum("GSM.ARFCN"),TN(),mNextWriteTime.FN(),
+	             mMapping.typeAndOffset(),mMapping.repeatLength()>51,false,mU);
 	OBJLOG(DEEPDEBUG) << "XCCHL1Encoder d[]=" << mD;
 	mD.LSB8MSB();
 	OBJLOG(DEEPDEBUG) << "XCCHL1Encoder d[]=" << mD;
@@ -858,7 +863,7 @@ void XCCHL1Encoder::sendFrame(const L2Frame& frame)
 	interleave();		// Interleave c[] to i[][], GSM 05.03 4.1.4.
 	transmit();			// Send the bursts to the radio, GSM 05.03 4.1.5.
 	// FIXME: is this FN OK, or do we need to back it up by 4?
-	gWriteGSMTAP(ARFCN(),mTN,mPrevWriteTime.FN(),frame);
+
 }
 
 
